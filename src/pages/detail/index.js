@@ -2,6 +2,8 @@ import Taro, { Component } from '@tarojs/taro';
 import { View, Text, Button } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import { getTopicInfo } from '../../actions/topiclist';
+import TopicInfo from '../../components/topicinfo/topicinfo';
+import Replies from '../../components/topicinfo/replies';
 
 @connect(function (store) {
   return {
@@ -17,6 +19,9 @@ import { getTopicInfo } from '../../actions/topiclist';
 })
 
 class Detail extends Component {
+  config = {
+    navigationBarTitleText: '话题详情'
+  }
 
   componentWillMount() {
     let params = { id: this.$router.params.topicid, mdrender: true }
@@ -24,8 +29,12 @@ class Detail extends Component {
   }
 
   render() {
-    //this.props.topicinfo.title
-    return (<View>detail</View>)
+    let { topicinfo, replies } = this.props;
+    console.log(topicinfo, replies)
+    return (<View>
+      <TopicInfo topicinfo={topicinfo} />
+      <Replies replies={replies} />
+    </View>)
   }
 }
 
