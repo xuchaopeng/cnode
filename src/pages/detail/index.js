@@ -7,6 +7,7 @@ import Replies from '../../components/topicinfo/replies';
 
 @connect(function (store) {
   return {
+    user: store.user,
     topicinfo: store.topiclist.topicinfo,
     replies: store.topiclist.replies
   }
@@ -24,8 +25,13 @@ class Detail extends Component {
   }
 
   componentWillMount() {
-    let params = { id: this.$router.params.topicid, mdrender: true }
+    let { user } = this.props;
+    let params = { id: this.$router.params.topicid, mdrender: true, accesstoken: user.accesstoken }
     this.props.getTopicInfo && this.props.getTopicInfo(params);
+  }
+
+  admire(reply) {
+    console.log('zs')
   }
 
   render() {
@@ -33,7 +39,7 @@ class Detail extends Component {
     console.log(topicinfo, replies)
     return (<View>
       <TopicInfo topicinfo={topicinfo} />
-      <Replies replies={replies} />
+      <Replies replies={replies} onAdmire={this.admire.bind(this)} />
     </View>)
   }
 }

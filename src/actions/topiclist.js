@@ -1,5 +1,6 @@
 import { getJSON, postJSON } from '../utils/request';
 import api from '../constants/api';
+import Taro from '@tarojs/taro';
 
 //请求首页数据
 export function getTopicList(params) {
@@ -35,6 +36,18 @@ export function getTopicInfo(params) {
       dispatch({ type: 'getTopicInfo', infoData: result.data.data })
     } else {
       console.log('请求话题详情出错')
+    }
+  }
+}
+
+//点赞话题回复
+export function admireTopic(params) {
+  return async dispatch => {
+    let result = await postJSON(api.upreply + params.replyid + '/ups', params);
+    if (result && result.success) {
+      dispatch({ type: 'admireSuccess' })
+    } else {
+      Taro.showToast({ title: '点赞失败', icon: 'none' })
     }
   }
 }

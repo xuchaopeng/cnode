@@ -8,6 +8,10 @@ const isweapp = process.env.TARO_ENV == "weapp"  //小程序环境
 
 class Replies extends Component {
 
+  admire(reply) {
+    this.props.onAdmire && this.props.onAdmire(reply);
+  }
+
   render() {
     let { replies } = this.props;
     return (<View>
@@ -30,7 +34,7 @@ class Replies extends Component {
                   </View>
                 </View>
                 <View className='topicinfo-repliy-right-zan'>
-                  <Image className='topicinfo-repliy-image' src={item.is_uped ? require('../../assets/img/myzan.png') : require('../../assets/img/zan.png')} />
+                  <Image onClick={this.admire.bind(this, item)} className='topicinfo-repliy-image' src={item.is_uped ? require('../../assets/img/myzan.png') : require('../../assets/img/zan.png')} />
                   <Text>{item.ups.length}</Text>
                   <Image className='topicinfo-repliy-image' src={require('../../assets/img/zhuan.png')} />
                 </View>
@@ -41,6 +45,10 @@ class Replies extends Component {
       }
     </View>)
   }
+}
+
+Replies.defaultProps = {
+  replies: []
 }
 
 export default Replies;
