@@ -51,3 +51,25 @@ export function admireTopic(params) {
     }
   }
 }
+
+//评论回复
+// export async function replyContent(params) {
+//   let result = await postJSON(api.replytopic + params.topicid + '/replies');
+//   if (result && result.data && result.data.success) {
+//     //成功评论
+//     return result.data;
+//   } else {
+//     //评论失败
+//     Taro.showToast({ title: '评论失败', icon: 'none' })
+//   }
+//   return false;
+// }
+
+//评论回复
+export function replyContent(params) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve({})
+    })
+  })
+}

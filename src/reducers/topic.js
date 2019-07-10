@@ -10,7 +10,7 @@ const TOPIC_STATE = {
 export default function topiclist(prestate = TOPIC_STATE, action) {
   switch (action.type) {
     case 'admireSuccess':
-      return { ...prestate, admireState: true }
+      return { ...prestate, admireState: !prestate.admireState }
     case 'getTopicInfo':
       return { ...prestate, replies: action.infoData.replies, topicinfo: { ...action.infoData, replies: null } }
     case 'getTopicList':
